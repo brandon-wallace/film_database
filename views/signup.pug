@@ -1,0 +1,16 @@
+extends layout
+
+block header
+    h1 Sign Up
+    
+block content
+    form(method='post')
+        label(for='username') Username
+        input(type='text' name='username' value='' placeholder='Enter Username')
+        label(for='email') Email Address
+        input(type='text' name='email' value='' placeholder='Enter Email')
+        label(for='password') Password
+        input(type='password' name='password' value='' placeholder='Enter Password')
+        label(for='confirm_password') Confirm Password
+        input(type='password' name='confirm_password' value='' placeholder='Re-Enter Password')
+        button(class='btn btn--large' type='submit') Submit

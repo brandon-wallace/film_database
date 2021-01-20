@@ -1,0 +1,12 @@
+extends layout
+
+block header
+    h1 header section
+    
+block content
+    h2 delete page
+    form(method='post' action='/delete/' + model.id)
+        p= model.id
+        p= model.title
+        p= model.year
+        button(type='submit') Delete

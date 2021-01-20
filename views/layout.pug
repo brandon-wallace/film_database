@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/style.css")
+        title #{title}
+    body
+        header
+            nav
+                ul.menu
+                    li.menu__item
+                        a(href="/").menu__link /home
+                    li.menu__item
+                        a(href="/login").menu__link /login
+                    li.menu__item
+                        a(href="/signup").menu__link /signup
+                    li.menu__item
+                        a(href="/films").menu__link /films
+                    li.menu__item
+                        a(href="/addentry").menu__link /addentry
+        block header
+
+        block content
+
+        script(src='../js/script.js')

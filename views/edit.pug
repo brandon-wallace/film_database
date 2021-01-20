@@ -1,0 +1,13 @@
+extends layout
+
+block header
+    h1 Edit
+    
+block content
+    form(method='post')
+        label(for='title') Title
+        input(type='text' name='title' value= model.title )
+        label(for='year') Year
+        input(type='text' name='year' value= model.year )
+        button(class='btn' type='submit') Save
+        a(class='btn' href='/films') Cancel

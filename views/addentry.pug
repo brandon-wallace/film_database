@@ -1,0 +1,13 @@
+extends layout
+
+block header
+    h1 Add
+    
+block content
+    form(method='post' action='/addentry')
+        label(for='title') Title
+        input(type='text' name='title' value='' placeholder='Add Title')
+        label(for='year') Year
+        input(type='text' name='year' value='' placeholder='YYYY' maxlength='4' minlength='4')
+        button(class='btn btn--large m-b-1' type='submit') Save
+        a(class='btn btn--large btn--outline' href='/films') Cancel
