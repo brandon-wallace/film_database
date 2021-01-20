@@ -2,15 +2,28 @@
 
 # An film database built with Nodejs, Express, and Sqlite3.
 
+Clone project.
 ```
 git clone https://github.com/brandon-wallace/film_database.git
+```
 
-cd film_database
+Change into film_database directory.
+```
+$ cd film_database/
+```
 
-npm install
+Install libraries.
+```
+$ npm install
+```
 
-npm start dev
+Start nodemon development server.
+```
+$ npm start dev
+```
 
+Using a browser navigate to the address 127.0.0.1:3000.
+```
 http://127.0.0.1:3000
 
 ```
