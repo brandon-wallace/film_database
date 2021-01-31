@@ -7,5 +7,7 @@ block content
     ul
         each film in films
             li(class='list__item') #{ film.title } #{ film.year } 
-                a(class='btn btn--blue' href="/edit/" + film.id) Edit
-                a(class='btn btn--red' href="/delete/" + film.id) Delete
+                a(class='btn btn--blue' href="/edit/" + film.id) 
+                    img(src='../images/edit.svg')
+                a(class='btn btn--red' href="/delete/" + film.id)
+                    img(src='../images/trash.svg')
