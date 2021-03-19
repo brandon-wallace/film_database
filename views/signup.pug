@@ -1,9 +1,7 @@
 extends layout
 
-block header
-    h1 Sign Up
-    
 block content
+    h1 Sign Up
     form(method='post')
         label(for='username') Username
         input(type='text' name='username' value='' placeholder='Enter Username')
@@ -13,4 +11,4 @@ block content
         input(type='password' name='password' value='' placeholder='Enter Password')
         label(for='confirm_password') Confirm Password
         input(type='password' name='confirm_password' value='' placeholder='Re-Enter Password')
-        button(class='btn btn--large' type='submit') Submit
+        button(class='btn btn--large' type='submit') Sign Up

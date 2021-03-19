@@ -1,10 +1,7 @@
 extends layout
 
-block header
-    h1 header section
-    
 block content
-    h2 delete page
+    h1 Delete 
     form(method='post' action='/delete/' + model.id)
         p= model.id
         p= model.title

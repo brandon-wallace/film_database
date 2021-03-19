@@ -1,12 +1,10 @@
 extends layout
 
-block header
-    h1 Login
-    
 block content
+    h1 Login
     form(method='post')
         label(for='email') Email Address
         input(type='text' name='email' value='' placeholder='Enter Email')
         label(for='password') Password
         input(type='password' name='password' value='' placeholder='Enter Password')
-        button(class='btn btn--large' type='submit') Submit
+        button(class='btn btn--large' type='submit') Login

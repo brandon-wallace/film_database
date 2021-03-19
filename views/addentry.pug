@@ -1,9 +1,7 @@
 extends layout
 
-block header
-    h1 Add
-    
 block content
+    h1 Add Entry
     form(method='post' action='/addentry')
         label(for='title') Title
         input(type='text' name='title' value='' placeholder='Add Title')

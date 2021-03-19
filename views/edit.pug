@@ -1,13 +1,11 @@
 extends layout
 
-block header
-    h1 Edit
-    
 block content
+    h1 Edit
     form(method='post')
         label(for='title') Title
         input(type='text' name='title' value= model.title )
         label(for='year') Year
         input(type='text' name='year' value= model.year )
-        button(class='btn' type='submit') Save
+        button(class='btn' type='submit') Update
         a(class='btn' href='/films') Cancel

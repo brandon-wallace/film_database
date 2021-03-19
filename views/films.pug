@@ -1,9 +1,8 @@
 extends layout
 
-block header
-    h1 Films
-    
 block content
+    h1 Films
+    img(src='../images/the_fastest_sword.jpg')
     ul
         each film in films
             li(class='list__item') #{ film.title } #{ film.year } 
