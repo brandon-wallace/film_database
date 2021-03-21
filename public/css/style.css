@@ -9,6 +9,11 @@ body {
     font-family: monospace, monospace;
 }
 
+main {
+    padding: 0 .5em;
+    box-sizing: border-box;
+}
+
 a {
     cursor: pointer;
     text-decoration: none;
@@ -113,6 +118,25 @@ input[type='password'] {
     margin-bottom: 1em;
 }
 
+.list {
+    margin: 0;
+    padding: 0;
+}
+
 .list__item {
+    font-weight: bold;
+    text-transform: uppercase;
     margin-bottom: 1em;
+}
+
+.list__item span {
+    font-weight: normal;
+}
+
+.list__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    max-width: 300px;
 }
