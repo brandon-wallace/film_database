@@ -1,10 +1,24 @@
+require('dotenv').config()
 const path = require('path')
 const express = require('express')
+const bcrypt = require('bcrypt')
+const passport = require('passport')
+const flash = require('express-flash')
+const session = require('express-session')
 const bodyParser = require('body-parser')
 const sqlite3 = require('sqlite3').verbose()
 
+const initializePassport = require('./authentication')
+initializePassport(
+    passport, 
+    email => users.find(user => user.email === email),
+    id => users.find(user => user.id === id)
+)
+
 const app = express()
+
 const dbName = path.join(__dirname, '../database', 'film_database.db');
+
 const db = new sqlite3.Database(dbName, err => {
     if (err) {
         return console.error(err.message);
@@ -18,6 +32,14 @@ const create_database = `CREATE TABLE IF NOT EXISTS films (
     year VARCHAR(4) NOT NULL
     );`;
 
+
+const create_users = `CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(32) NOT NULL
+    );`;
+
 db.run(create_database, err => {
     if (err) {
         return console.error(err.message);
@@ -25,8 +47,21 @@ db.run(create_database, err => {
     console.log('Successful creation of the films table.');
 });
 
+db.run(create_users, err => { 
+    if (err) { return console.error(err.message); }
+    console.log('Successful creation of the users table.'); 
+});
+
 
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(flash())
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false, // Resave session variables if there is no change.
+    saveUninitialized: false // Do not save empty values.
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'pug');
@@ -42,8 +77,29 @@ app.get('/login', (request, response, next) => {
     response.render('login', {title: 'login'})    
 });
 
-app.get('/signup', (request, response, next) => {
+app.post('/login', (request, response, next) => {
+})
+
+app.get('/signup', async (request, response, next) => {
     response.render('signup', {title: 'signup'})    
+});
+
+app.post('/signup', async (request, response, next) => {
+    try {
+        const hashedPassword = await bcrypt.hash(request.body.password, 10)
+        const user = [request.body.username, request.body.email, hashedPassword];
+        const sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
+        db.run(sql, user, err => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+        console.log(user);
+        response.redirect('/login');
+    }
+    catch {
+        response.redirect('/signup');
+    }
 });
 
 app.get('/films', (request, response, next) => {

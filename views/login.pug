@@ -2,7 +2,8 @@ extends layout
 
 block content
     h1 Login
-    form(method='post')
+    p #{messages.error}
+    form(action="/login" method='post')
         label(for='email') Email Address
         input(type='text' name='email' value='' placeholder='Enter Email')
         label(for='password') Password
