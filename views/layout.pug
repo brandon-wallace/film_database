@@ -7,25 +7,24 @@ html(lang="en")
         title #{title}
     body
         header
-            div.hamburger_menu
-                button.bttn menu
             nav
+                input(type='checkbox')#hamburger__menu
+                label(for='hamburger__menu')
+                    span.hamburger__icon
+                div.hamburger__overlay
                 ul.menu
                     li.menu__item
-                        img(src='../images/home.svg' alt='home')
                         a(href="/").menu__link home
                     li.menu__item
-                        a(href="/login").menu__link /login
+                        a(href="/login").menu__link login
                     li.menu__item
-                        a(href="/signup").menu__link /signup
+                        a(href="/signup").menu__link signup
                     li.menu__item
-                        a(href="/films").menu__link /films
+                        a(href="/films").menu__link films
                     li.menu__item
-                        a(href="/addentry").menu__link /addentry
-
+                        a(href="/addentry").menu__link addentry
         main
             block content
-
         footer
 
         script(src='../js/script.js')
