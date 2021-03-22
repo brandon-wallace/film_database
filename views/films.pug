@@ -2,10 +2,11 @@ extends layout
 
 block content
     h1 Films
-    img(src='../images/the_fastest_sword.jpg')
-    ul
+    ul(class='list')
         each film in films
-            li(class='list__item') #{ film.title } #{ film.year } 
+            img(src='../images/placeholder_image.jpg' alt='placeholder img' class='list__img')
+            li(class='list__item') #{ film.title } 
+                span (#{ film.year })
                 a(class='btn btn--blue' href="/edit/" + film.id) 
                     img(src='../images/edit.svg')
                 a(class='btn btn--red' href="/delete/" + film.id)
