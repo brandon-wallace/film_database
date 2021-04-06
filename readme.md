@@ -2,9 +2,9 @@
 
 # An film database built with Nodejs, Express, and Sqlite3.
 
-![screenshot1](/screenshot1.png)
+![screenshot1](screenshot1.png)
 
-![screenshot2](/screenshot2.png)
+![screenshot2](screenshot2.png)
 
 Clone project.
 ```
