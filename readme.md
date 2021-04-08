@@ -21,6 +21,13 @@ Install libraries.
 $ npm install
 ```
 
+Create a .env file and add SESSION_SECRET variable set to a random string.
+```
+$ touch .env
+
+SESSION_SECRET=abcdefg-hijklm-nopqrs-tuvwxyz
+```
+
 Start nodemon development server.
 ```
 $ npm start dev
