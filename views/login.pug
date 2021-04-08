@@ -1,11 +1,15 @@
 extends layout
 
 block content
-    h1 Login
-    p #{messages.error}
-    form(action="/login" method='post')
-        label(for='email') Email Address
-        input(type='text' name='email' value='' placeholder='Enter Email')
-        label(for='password') Password
-        input(type='password' name='password' value='' placeholder='Enter Password')
-        button(class='btn btn--large' type='submit') Login
+    div.container
+        section.left
+            h1.centered Login
+            if messages.error
+                p #{messages.error}
+            form(action="/login" method='post')
+                label(for='email') Email
+                input(type='text' name='email' value='' placeholder='Enter Email')
+                label(for='password') Password
+                input(type='password' name='password' value='' placeholder='Enter Password')
+                button(class='btn btn--large' type='submit') Login
+        section.right

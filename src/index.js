@@ -30,10 +30,9 @@ const create_database = `CREATE TABLE IF NOT EXISTS films (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title VARCHAR(100) NOT NULL,
     year VARCHAR(4) NOT NULL
-    );`;
+    );
 
-
-const create_users = `CREATE TABLE IF NOT EXISTS users (
+    CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
@@ -44,12 +43,7 @@ db.run(create_database, err => {
     if (err) {
         return console.error(err.message);
     }
-    console.log('Successful creation of the films table.');
-});
-
-db.run(create_users, err => { 
-    if (err) { return console.error(err.message); }
-    console.log('Successful creation of the users table.'); 
+    console.log('Successful creation of the films and users table.');
 });
 
 
@@ -60,6 +54,7 @@ app.use(session({
     resave: false, // Resave session variables if there is no change.
     saveUninitialized: false // Do not save empty values.
 }))
+
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -77,8 +72,32 @@ app.get('/login', (request, response, next) => {
     response.render('login', {title: 'login'})    
 });
 
+/*
 app.post('/login', (request, response, next) => {
+    let email = [request.body.email];
+    let password = request.body.password;
+    const sql = 'SELECT * FROM users WHERE email = ?';
+    db.run(sql, email, (err, result, rows) => {
+        if (err) {
+            console.error(err.message);
+            return;
+        } 
+        console.log(result);
+        response.redirect('/films');
+    });
 })
+*/
+
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/films',
+    failureRedirect: '/login',
+    failureFlash: true
+}));
+
+app.get('/logout', (request, response, next) => {
+    request.logout();
+    response.redirect('/');
+});
 
 app.get('/signup', async (request, response, next) => {
     response.render('signup', {title: 'signup'})    
@@ -94,7 +113,6 @@ app.post('/signup', async (request, response, next) => {
                 console.error(err.message);
             }
         });
-        console.log(user);
         response.redirect('/login');
     }
     catch {

@@ -1,15 +1,18 @@
 extends layout
 
 block content
-    h1 Sign Up
-    form(action="/signup" method='POST')
-        label(for='username') Username
-        input(type='text' name='username' id='username' value='' placeholder='Enter Username' required)
-        label(for='email') Email Address
-        input(type='text' name='email' id='email' value='' placeholder='Enter Email' required)
-        label(for='password') Password
-        input(type='password' name='password' id='password' value='' placeholder='Enter Password' required)
-        label(for='confirm_password') Confirm Password
-        input(type='password' name='confirm_password' id='confirm_password' value='' placeholder='Re-Enter Password' required)
-        button(class='btn btn--large' type='submit') Sign Up
-        a(href="/login") Already signed up?
+    div.container
+        section.left
+            h1.centered Sign Up
+            form(action="/signup" method='POST')
+                label(for='username') Username
+                input(type='text' name='username' id='username' value='' placeholder='Enter Username' required)
+                label(for='email') Email
+                input(type='text' name='email' id='email' value='' placeholder='Enter Email' required)
+                label(for='password') Password
+                input(type='password' name='password' id='password' value='' placeholder='Enter Password' required)
+                label(for='confirm_password') Confirm Password
+                input(type='password' name='confirm_password' id='confirm_password' value='' placeholder='Re-Enter Password' required)
+                button(class='btn btn--large' type='submit') Sign Up
+                a(href="/login") Already signed up?
+        section.right
