@@ -17,7 +17,7 @@ def create_table():
 
 
 def insert(title, length, year):
-    '''Add an entry into database.'''
+    '''Add entry into database.'''
 
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
@@ -27,7 +27,7 @@ def insert(title, length, year):
 
 
 def read():
-    '''Query all rows.'''
+    '''Query all records.'''
 
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
@@ -38,7 +38,7 @@ def read():
 
 
 def delete(id):
-    '''Delete records from database.'''
+    '''Delete a record from database.'''
 
     conn = sqlite3.connect('database.db')
     cur = conn.cursor()

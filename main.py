@@ -4,7 +4,7 @@ from tkinter import ttk, CENTER, W, NO, YES
 from backend import insert, read, delete, update
 
 
-def insert_data():
+def insert_film():
     '''Insert record into database'''
     
     insert(title_entry.get(), length_entry.get(), year_entry.get())
@@ -70,6 +70,7 @@ window.rowconfigure(8, weight=1)
 window_label = tk.Label(window, text="Film Database", font=('Arial 12 bold'))
 window_label.grid(row=0, column=0, pady=15, padx=15) 
 
+# Entry fields and labels
 title_label = tk.Label(window, text="Title:")
 title_label.grid(row=1, column=0, sticky="w", padx=5, pady=5) 
 title_entry = tk.Entry(window)
@@ -85,10 +86,11 @@ year_label.grid(row=3, column=0, sticky="w", padx=5, pady=5)
 year_entry = tk.Entry(window)
 year_entry.grid(row=3, column=1, columnspan=3, sticky="ew", padx=5, pady=5) 
 
+# Buttons
 button_frame = tk.Frame(window)
 button_frame.grid(row=4, column=0, columnspan=4, sticky="w", padx=5, pady=5)
 
-insert_button = tk.Button(button_frame, text="Insert", width=10, bg="#0099ff", command=insert_data)
+insert_button = tk.Button(button_frame, text="Insert", width=10, bg="#0099ff", command=insert_film)
 insert_button.pack(side=tk.LEFT, padx=2)
 
 view_button = tk.Button(button_frame, text="View", width=10, bg="#ffff00", command=view_all)
@@ -100,6 +102,7 @@ delete_button.pack(side=tk.LEFT, padx=2)
 update_button = tk.Button(button_frame, text="Update", width=10, bg="#00ff00", command=update_film)
 update_button.pack(side=tk.LEFT, padx=2)
 
+# Treeview
 tree = ttk.Treeview(window)
 tree['columns'] = ('id', 'title', 'length', 'year')
 
