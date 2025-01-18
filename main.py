@@ -74,6 +74,9 @@ class Form(tk.Frame):
         self.update_button = tk.Button(self, text="Update", width=10, bg="#00ff00", command=self.update_film)
         self.update_button.grid(row=5, column=3, sticky="ew", padx=5, pady=5) 
 
+        self.clear_button = tk.Button(self, text="Clear", width=10, bg="#ffa500", command=self.clear_fields)
+        self.clear_button.grid(row=5, column=4, sticky="ew", padx=5, pady=5) 
+
         self.tree_frame = tk.Frame(self)
         self.tree_frame.grid(row=8, column=0, columnspan=4, sticky="nsew", padx=5, pady=5)
         self.tree_frame.columnconfigure(0, weight=1)
@@ -133,13 +136,20 @@ class Form(tk.Frame):
         self.view_all()
 
     def delete_film(self):
-        '''Delet.parente films from database'''
+        '''Delete films from database'''
 
         for i in self.tree.selection():
             t = self.tree.item(i)
             id = t['values'][0]
             self.delete(id)
         self.view_all()
+
+    def clear_fields(self):
+        '''Clear fields'''
+
+        self.parent.title_entry.delete(0, tk.END)
+        self.parent.length_entry.delete(0, tk.END)
+        self.parent.year_entry.delete(0, tk.END)
 
     def view_all(self):
         '''View all records'''
