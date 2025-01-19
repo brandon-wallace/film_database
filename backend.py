@@ -1,62 +1,89 @@
 #!/usr/bin/env python3
 import sqlite3
+from contextlib import contextmanager
 
 
 DATABASE = 'database.db'
 
-def create_table():
-    ''' Create table if not existing '''
 
-    conn = sqlite3.connect(DATABASE)
-    cursor = conn.cursor()
-    cursor.execute('''CREATE TABLE IF NOT EXISTS films (
+@contextmanager
+def connect_to_db():
+    '''Create connection to database'''
+
+    conn = None
+    try:
+        conn = sqlite3.connect(DATABASE)
+        yield conn
+    except sqlite3.Error as e:
+        raise Exception(f'Database error: {str(e)}')
+    finally:
+        if conn:
+            conn.close()
+
+def create_table():
+    ''' Create table if not existing'''
+
+    sql = '''CREATE TABLE IF NOT EXISTS films (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                   title TEXT,
-                   length INTEGER,
-                   year INTEGER)''')
-    conn.commit()
-    conn.close()
+                   title TEXT NOT NULL,
+                   length INTEGER NOT NULL,
+                   year INTEGER NOT NULL)'''
+
+    with connect_to_db() as conn:
+        cursor = conn.cursor()
+        cursor.execute(sql)
+        conn.commit()
 
 
 def insert(title, length, year):
-    '''Add entry into database.'''
+    '''Add database entry'''
 
-    conn = sqlite3.connect(DATABASE)
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO films (title, length, year) VALUES (?, ?, ?)", (title.strip(), length, year))
-    conn.commit()
-    conn.close()
+    sql = '''INSERT INTO films (title, length, year) VALUES (?, ?, ?)'''
+
+    with connect_to_db() as conn:
+        cur = conn.cursor()
+        cur.execute(sql, (title.strip(), int(length), int(year)))
+        conn.commit()
 
 
 def read():
     '''Query all records.'''
 
-    conn = sqlite3.connect(DATABASE)
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM films")
-    rows = cursor.fetchall()
-    conn.close()
-    return rows
+    sql = '''SELECT * FROM films'''
+
+    with connect_to_db() as conn:
+        cur = conn.cursor()
+        cur.execute(sql)
+        return cur.fetchall()
 
 
 def delete(id):
     '''Delete a record from database.'''
 
-    conn = sqlite3.connect(DATABASE)
-    cur = conn.cursor()
-    cur.execute("DELETE FROM films WHERE id=?", (id,))
-    conn.commit()
-    conn.close()
+    if not isinstance(id, (int, str)) or not str(id).isdigit():
+        raise ValueError("ID is not valid")
+
+    sql = '''DELETE FROM films WHERE id=?''' 
+
+    with connect_to_db() as conn:
+        cur = conn.cursor()
+        cur.execute(sql, (int(id),))
+        success = cur.rowcount > 0
+        conn.commit()
+        return success
 
 
 def update(id, title, length, year):
     '''Update a database records.'''
 
-    conn = sqlite3.connect(DATABASE)
-    cur = conn.cursor()
-    cur.execute("UPDATE films SET title=?, length=?, year=? WHERE id=?", (title, length, year, id))
-    conn.commit()
-    conn.close()
+    sql = '''UPDATE films SET title=?, length=?, year=? WHERE id=?'''
+
+    with connect_to_db() as conn:
+        cur = conn.cursor()
+        cur.execute(sql, (title.strip(), int(length), int(year), int(id)))
+        success = cur.rowcount > 0
+        conn.commit()
+        return success
 
 
 create_table()
