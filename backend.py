@@ -23,7 +23,7 @@ def insert(title, length, year):
 
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO films (title, length, year) VALUES (?, ?, ?)", (title, length, year))
+    cursor.execute("INSERT INTO films (title, length, year) VALUES (?, ?, ?)", (title.strip(), length, year))
     conn.commit()
     conn.close()
 
