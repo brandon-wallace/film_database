@@ -62,23 +62,23 @@ class Form(tk.Frame):
         self.update = update
 
         # Buttons
-        self.insert_button = tk.Button(self, text="Insert", width=10, bg="#0099ff", command=self.insert_film)
-        self.insert_button.grid(row=5, column=0, sticky="ew", padx=5, pady=5)
+        self.insert_button = tk.Button(self, text="Insert", width=20, bg="#0099ff", command=self.insert_film)
+        self.insert_button.grid(row=5, column=0, sticky="e", padx=5, pady=5)
 
-        self.view_button = tk.Button(self, text="View", width=10, bg="#ffff00", command=self.view_all)
-        self.view_button.grid(row=5, column=1, sticky="ew", padx=5, pady=5)
+        self.view_button = tk.Button(self, text="View", width=20, bg="#ffff00", command=self.view_all)
+        self.view_button.grid(row=5, column=1, sticky="e", padx=5, pady=5)
 
-        self.delete_button = tk.Button(self, text="Delete", width=10, bg="#e62e00", command=self.delete_film)
-        self.delete_button.grid(row=5, column=2, sticky="ew", padx=5, pady=5)
+        self.delete_button = tk.Button(self, text="Delete", width=20, bg="#e62e00", command=self.delete_film)
+        self.delete_button.grid(row=5, column=2, sticky="e", padx=5, pady=5)
 
-        self.update_button = tk.Button(self, text="Update", width=10, bg="#00ff00", command=self.update_film)
-        self.update_button.grid(row=5, column=3, sticky="ew", padx=5, pady=5) 
+        self.update_button = tk.Button(self, text="Update", width=20, bg="#00ff00", command=self.update_film)
+        self.update_button.grid(row=5, column=3, sticky="e", padx=5, pady=5) 
 
-        self.clear_button = tk.Button(self, text="Clear", width=10, bg="#ffa500", command=self.clear_fields)
-        self.clear_button.grid(row=5, column=4, sticky="ew", padx=5, pady=5) 
+        self.clear_button = tk.Button(self, text="Clear", width=20, bg="#ffa500", command=self.clear_fields)
+        self.clear_button.grid(row=5, column=4, sticky="e", padx=5, pady=5) 
 
         self.tree_frame = tk.Frame(self)
-        self.tree_frame.grid(row=8, column=0, columnspan=4, sticky="nsew", padx=5, pady=5)
+        self.tree_frame.grid(row=8, column=0, columnspan=5, sticky="nsew", padx=5, pady=5)
         self.tree_frame.columnconfigure(0, weight=1)
         self.tree_frame.rowconfigure(0, weight=1)
 
