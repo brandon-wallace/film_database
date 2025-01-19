@@ -21,7 +21,7 @@ class Application(tk.Tk):
         self.rowconfigure(8, weight=1)
 
         self.window_label = tk.Label(self, text="Film Database", font=('Arial 12 bold'))
-        self.window_label.grid(row=4, column=0, columnspan=4, pady=15, padx=15)
+        self.window_label.grid(row=0, column=0, columnspan=4, pady=15, padx=15)
 
         # Entry fields and labels
         self.title_label = tk.Label(self, text="Title:")
