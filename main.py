@@ -24,26 +24,52 @@ class Application(tk.Tk):
         self.window_label.grid(row=0, column=0, columnspan=4, pady=15, padx=15)
 
         # Entry fields and labels
+        # Title
         self.title_label = tk.Label(self, text="Title:")
         self.title_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
 
         self.title_entry = tk.Entry(self)
         self.title_entry.grid(row=1, column=1, columnspan=3, sticky="ew", padx=5, pady=5)
 
+        # Length
         self.length_label = tk.Label(self, text="Length:")
         self.length_label.grid(row=2, column=0, sticky="w", padx=5, pady=5)
 
         self.length_entry = tk.Entry(self)
         self.length_entry.grid(row=2, column=1, columnspan=3, sticky="ew", padx=5, pady=5)
 
+        # Year
         self.year_label = tk.Label(self, text="Year:")
         self.year_label.grid(row=3, column=0, sticky="w", padx=5, pady=5)
 
         self.year_entry = tk.Entry(self)
         self.year_entry.grid(row=3, column=1, columnspan=3, sticky="ew", padx=5, pady=5)
 
+        # Validation
+        self.year_error = tk.Label(self, fg='#cc0000')
+        self.year_error.grid(row=3, column=1) 
+
         self.frame = Form(self)
         self.frame.grid(row=4, column=0, columnspan=4, sticky="nsew", padx=5, pady=5)
+         
+        self.validate_referrence = self.register(self.validate_year)
+        self.invalid_referrence = self.register(self.validate_year_error)
+        self.year_entry.configure(
+                validate='focusout',
+                validatecommand = (self.validate_referrence, '%s'),
+                invalidcommand = (self.invalid_referrence, '%s')
+                )
+
+    def validate_year(self, year):
+        if len(year) != 4 or not year.isdigit():
+            return False
+        int_year = int(year)
+        return 1900 <= int_year <= 2100
+
+    def validate_year_error(self, year):
+        self.year_error.configure(
+                text = f'Year must be four characters.'
+                )
 
 
 class Form(tk.Frame):
