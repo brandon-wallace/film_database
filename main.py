@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import tkinter as tk
-from tkinter import ttk, CENTER, W, NO, YES
+from tkinter import ttk, CENTER, W, NO, YES, messagebox
 from backend import insert, read, delete, update
 
 
@@ -138,11 +138,15 @@ class Form(tk.Frame):
     def delete_film(self):
         '''Delete films from database'''
 
-        for i in self.tree.selection():
-            t = self.tree.item(i)
-            id = t['values'][0]
-            self.delete(id)
-        self.view_all()
+        selected = self.tree.selection()
+        if selected:
+            confirm = messagebox.askyesno("Confirm Delete", "Are you sure you want to delete the selected record?")
+        if confirm:
+            for i in self.tree.selection():
+                t = self.tree.item(i)
+                id = t['values'][0]
+                self.delete(id)
+            self.view_all()
 
     def clear_fields(self):
         '''Clear fields'''
@@ -150,6 +154,7 @@ class Form(tk.Frame):
         self.parent.title_entry.delete(0, tk.END)
         self.parent.length_entry.delete(0, tk.END)
         self.parent.year_entry.delete(0, tk.END)
+        self.parent.year_error.config(text="")
 
     def view_all(self):
         '''View all records'''

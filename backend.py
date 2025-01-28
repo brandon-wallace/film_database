@@ -20,6 +20,7 @@ def connect_to_db():
         if conn:
             conn.close()
 
+
 def create_table():
     ''' Create table if not existing'''
 
@@ -27,7 +28,8 @@ def create_table():
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    title TEXT NOT NULL,
                    length INTEGER NOT NULL,
-                   year INTEGER NOT NULL)'''
+                   year INTEGER NOT NULL
+                   )'''
 
     with connect_to_db() as conn:
         cursor = conn.cursor()
